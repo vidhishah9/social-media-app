@@ -3,9 +3,10 @@ import React, { }  from 'react';
 import { useState } from "react";
 import { onAuthStateChanged } from "firebase/auth";
 import { getAuth} from "firebase/auth";
-export default function Profile() {
+// import {MyForm} from "./MyForm.js";
+import { socket } from '../socket';
 
-
+export function Profile() {
     const [Email, setEmail] = useState("")
     const auth = getAuth();
         console.log("Useeffect")
@@ -13,7 +14,10 @@ export default function Profile() {
             if (user) {
                 const email = user.email;
                 setEmail(email)
-                console.log("Rerender1")
+                // socket.on("connect", () => {
+                //   socket.emit("sendEmail", { text: Email }); // Send the current value to the server
+                // });    
+          
         
             } 
             });   

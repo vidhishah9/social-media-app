@@ -12,6 +12,7 @@ cors: {
     },
 });
 var ids = []
+// var messages = []
 module.exports.ids = ids
 io.on('connection', (socket) => {
   socket.on("sendID", (data) => {
@@ -25,17 +26,31 @@ io.on('connection', (socket) => {
   var idtouse = "default"
   socket.on("getID", (data) => {
     idtouse = data.text
-    console.log("ITS COMING HERE")
+    //console.log("ITS COMING HERE")
     // io.to(impID).emit('private', data.text);
   });
   
-  socket.on("sendMessage", (data) => {
-    console.log(idtouse + "HEREEEE")
-    console.log(data.text)
-    io.to(idtouse).emit('private', data.text);
+  socket.on("sendMessage", (data) => { //send message from server to client 
+    // console.log(idtouse + "HEREEEE")
+    io.to(idtouse).emit('private', data.text) //send message back to client;
   });
   
+  socket.userData = { email: null };
   
+  socket.on("sendEmail", (data) => { //receive email from client  
+    console.log("Hello from SendEmail")
+    console.log(data.text)
+    socket.userData.email = data.text;
+
+
+  });
+
+  socket.on("getCustomData", () => {
+    console.log("UserData requested by client:", socket.userData);
+    socket.emit("customDataResponse", socket.userData);
+  });
+
+
 
 
 

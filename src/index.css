@@ -1,2 +1,98 @@
+body {
+    background-color: #F6F6F4
+}
+#RegisterPage {
+    position: absolute;        /* Or `fixed` */
+    top: 50%;                  /* Move to 50% vertically */
+    left: 50%;                 /* Move to 50% horizontally */
+    transform: translate(-50%, -50%); /* Adjust by half of the element's width/height */
+    border-style: solid;
+    border-width: thin;
+    border-color: white;
+    border-radius: 25px;
+    background-color: white;
+    height: 100px;
+    width: fit-content;
+    height: fit-content;
+    text-align: center;
+}
+
+#RegisterPageTitle {
+    border-radius: 25px;
+    font-family: "Lucida Console", "Courier New", monospace;
+    font-size: 60px;
+}
+
+#LabelTtextEmail {
+    background-color: white;
+    font-family: "Lucida Console", "Courier New", monospace;
+    font-size: 25px;
+}
+
+#LabelTextPassword {
+    background-color: white;
+    font-family: "Lucida Console", "Courier New", monospace;
+    font-size: 25px;
+}
+
+#CTLButton {
+    border-radius: 25px;
+    height: 45px;
+    background-color: #008CBA;
+    color: white;
+}
+
+#RegisterPassInput {
+    height: 30px;
+    width: 250px;
+    border-radius: 10px;
+}
+
+#RegisterUserInput {
+    height: 30px;
+    width: 250px;
+    border-radius: 10px;
+}
+
+#RegisterButton {
+    border-radius: 25px;
+    height: 45px;
+    width: 100px;
+    background-color: #008CBA;
+    color: white;
+}
+
+#LoginPage {
+    position: absolute;        /* Or `fixed` */
+    top: 50%;                  /* Move to 50% vertically */
+    left: 50%;                 /* Move to 50% horizontally */
+    transform: translate(-50%, -50%); /* Adjust by half of the element's width/height */
+    border-style: solid;
+    border-width: thin;
+    border-color: white;
+    border-radius: 25px;
+    background-color: white;
+    height: 100px;
+    width: fit-content;
+    height: fit-content;
+    text-align: center;
+}
+
+#LoginPageTitle {
+    border-radius: 25px;
+    font-family: "Lucida Console", "Courier New", monospace;
+    font-size: 60px;
 
 
+}
+#Message {
+    display: block; /* Fit content's width and height */
+    padding: 20px; /* Adds 10px to each side (width and height) */
+      /* box-sizing: border-box; Includes padding and borders in width calculations */
+      border-radius: 25px;
+    border-width: thin;
+    background-color: white;
+    color: #F6F6F4;
+    text-align: center ;
+    background-color: #5426ed;
+    width: fit-content}

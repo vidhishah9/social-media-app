@@ -45,30 +45,39 @@ export default function Register() {
               <Login></Login>
         )}
       </div>
-      <div>
+      <div id = "RegisterPage">
         {changetoRegister && (
 
+                <h1 id = "RegisterPageTitle"> Register Page
                     <form onSubmit={handleSubmit}>
-                    <button type="submit" onClick={setpage}>Change to Login</button>
-                    <label>Enter your email:
-                    <input 
+                    <label id = "LabelTtextEmail">Email:
+                      <br></br>
+                    <input id = "RegisterUserInput" 
                       type="text" 
                       name="email" 
                       value={inputs.email || ""} 
                       onChange={handleChange}
                     />
                     </label>
-                    <label>Enter your password:
-                      <input 
+                    <br></br>
+                    <label id = "LabelTextPassword">Password:
+                    <br></br>
+
+                      <input id = "RegisterPassInput"
                         type="text" 
                         name="password" 
                         value={inputs.password || ""} 
                         onChange={handleChange}
                       />
                       </label>
-                      <input type="submit" value = "Register"></input>
+                      <br></br>
+                      <input id = "RegisterButton" type="submit" value = "Register"></input>
+                      <br></br>
+                      <button id = "CTLButton" type="submit" onClick={setpage}>Change to Login</button>
+
             
-                  </form>            
+                  </form>   
+                </h1>         
       
         )}
       </div>

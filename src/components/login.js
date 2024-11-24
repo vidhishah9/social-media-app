@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import Register from "./register.js"
 import {auth} from "./firebase";
 import { setPersistence, signInWithEmailAndPassword, browserSessionPersistence } from "firebase/auth";
-import Profile from './profile.js';
+import {Profile} from './profile';
 import Chat from './chat.js'
 import { socket } from '../socket.js';
 
@@ -62,29 +62,38 @@ export default function Login() {
               <Register></Register>
         )}
       </div>
-        <div>
+        <div id =  "RegisterPage">
         {changetoLogin && (
+              <h1 id = "RegisterPageTitle"> Login Page
+
                       <form onSubmit={handleSubmit}>
-                      <button type="submit" onClick ={setpage}>Change to Register</button>
-                      <label>Enter your email:
-                      <input 
+                      <label id = "LabelTtextEmail">Email:
+                      <br></br>
+
+                      <input id = "RegisterUserInput"
                       type="text" 
                       name="email" 
                       value={inputs.email || ""} 
                       onChange={handleChange}
                       />
                       </label>
-                      <label>Enter your password:
-                      <input 
+                      <br></br>
+                      <label id = "LabelTextPassword">Password:
+                      <br></br>
+
+                      <input id = "RegisterPassInput"
                           type="text" 
                           name="password" 
                           value={inputs.password || ""} 
                           onChange={handleChange}
                       />
                       </label>
-                      <input type="submit" value = "Login"></input>
-          
+                      <br></br>
+                      <input id = "RegisterButton" type="submit" value = "Login"></input>
+                    <button id = "CTLButton" type="submit" onClick ={setpage}>Change to Register</button>
+        
                   </form>
+                </h1>
           
       
         )}
