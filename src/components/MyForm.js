@@ -11,7 +11,6 @@ export function MyForm() {
   const [displaymessage, setdisplayMessage] = useState([""]);
   const [displayIds, setdisplayIds] = useState([]);
   const [idValue, setidValue] = useState('');
-  
   const user = auth.currentUser;
   useEffect(() => {
     // Set up the displayUserIds listener
@@ -20,17 +19,17 @@ export function MyForm() {
     });
   
     socket.on('private', (msg) => { //receive message from server  
-    socket.emit("getCustomData");
-    var getEmail = ""
-    socket.on("customDataResponse", (data) => {
-      console.log("Received custom data from server:", data.email);
-      getEmail = data.email
-      msg = "From: " + getEmail + msg  
-      messages.push(msg)
-      setdisplayMessage((prevMessages) => [...prevMessages, msg]); // Update state properly
+    console.log(msg.text + "RIGHT")
+    console.log(msg.email + "RIGHT") 
+    msg = "From: " + msg.email + msg.text 
+    messages.push(msg)
+    setdisplayMessage((prevMessages) => [...prevMessages, msg]); // Update state properly
 
+  
     });
-    });
+    socket.on("sendEmailToClient", (data)=> {
+      console.log(data);
+    })
   
     // Cleanup listeners when the component unmounts
     return () => {
@@ -40,22 +39,19 @@ export function MyForm() {
   }, []);
   
   function onSubmit(event) {
-
     if (user) {
-      var setemail =  user.email;
-      console.log("onSubmit here")
-        socket.emit("sendEmail", { text: setemail }); // Send the current value to the server
+        // socket.emit("sendEmail", { text: setemail }); // Send the current value to the server
     } else {
       console.log("No user is signed in.");
     }
-
     event.preventDefault();
     setMessage(value); // Update the message state with the current value
     socket.emit("getID", { text: idValue });
-    socket.emit("sendMessage", { text: value });
-    var newvalue = "You " + setemail + ": " + value 
+    socket.emit("sendMessage", { text: value, email: user.email });
+    var newvalue = "You " + user.email + ": " + value 
     setdisplayMessage((prevMessages) => [...prevMessages, newvalue]); // Update state properly
-
+    var setemail =  user.email;
+    socket.emit("sendEmail", { text: setemail });
   }
 
   return (
