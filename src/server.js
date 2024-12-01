@@ -12,6 +12,7 @@ cors: {
     },
 });
 var ids = []
+var emails = []
 module.exports.ids = ids
 io.on('connection', (socket) => {
 
@@ -22,15 +23,21 @@ io.on('connection', (socket) => {
     io.emit('displayUserIds', ids); //send ids back to client for display
 
   });
+  socket.on("sendEmailToDisplay", (data) => {
+    emails.push(data.text)
+    console.log("Right" + data.text)
+    io.emit('displayEmails', emails); //send ids back to client for display
+
+  });
+
+
 
   socket.on("sendIDToDelete", (data) => {
-    console.log("Here")
     for (let i = 0; i < ids.length; i++) {
       if (ids[i]==data.text) {
         ids.splice(i, 1)
       }
     }
-    console.log(ids)
     io.emit('displayUserIds', ids); //send ids back to client for display
     socket.disconnect();
 
@@ -41,16 +48,13 @@ io.on('connection', (socket) => {
   var idtouse = "default"
   socket.on("getID", (data) => {
     socket.userData.id = data.text
-    console.log(socket.userData.id)
     idtouse = data.text
   });
   socket.on("sendMessage", (data) => { //send message from server to client 
     io.to(idtouse).emit('private', data) //send message back to client;
   });
   socket.on("sendEmail", (data) => { //receive email from client  
-    console.log("First")
     socket.userData.email = data.text;
-    console.log(socket.userData.email)
     socket.emit("sendEmailToClient", { text: socket.userData.email })
   });
 

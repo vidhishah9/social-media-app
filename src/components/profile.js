@@ -9,16 +9,14 @@ import { socket } from '../socket';
 export function Profile() {
     const [Email, setEmail] = useState("")
     const auth = getAuth();
+    socket.userData = { email: null, id: null };
         console.log("Useeffect")
         onAuthStateChanged(auth, (user) => {
             if (user) {
                 const email = user.email;
-                setEmail(email)
-                // socket.on("connect", () => {
-                //   socket.emit("sendEmail", { text: Email }); // Send the current value to the server
-                // });    
-          
-        
+                socket.userData.email = email
+                socket.userData.id = socket.id
+                setEmail(email)          
             } 
             });   
 

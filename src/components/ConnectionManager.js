@@ -17,6 +17,7 @@ export function ConnectionManager() {
       socket.off("connect").on("connect", () => { // Removes previous listeners
         console.log("Connected:", socket.id);
         socket.emit("sendID", { text: socket.id });
+        socket.emit("sendEmailToDisplay", {text: socket.userData.email})
     });
       }
 

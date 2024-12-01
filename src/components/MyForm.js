@@ -10,6 +10,8 @@ export function MyForm() {
   const [message, setMessage] = useState('');
   const [displaymessage, setdisplayMessage] = useState([""]);
   const [displayIds, setdisplayIds] = useState([]);
+  const [displayEmails, setdisplayEmails] = useState([]);
+
   const [idValue, setidValue] = useState('');
   const user = auth.currentUser;
   useEffect(() => {
@@ -17,6 +19,9 @@ export function MyForm() {
       setdisplayIds(ids);
     });
   
+    socket.on('displayEmails', (emails) => {
+      setdisplayEmails(emails);
+    });
     socket.on('private', (msg) => { //receive message from server  
     msg = "From: " + msg.email + " " + msg.text 
     messages.push(msg)
@@ -31,6 +36,7 @@ export function MyForm() {
     // Cleanup listeners when the component unmounts
     return () => {
       socket.off('displayUserIds');
+      socket.off('displayEmails');
       socket.off('private');
     };
   }, []);
@@ -55,7 +61,7 @@ export function MyForm() {
       <ul>
         {displayIds.map((id, index) => (
           <button key={index} data-id={id} onClick={() => setidValue(id)}>
-            {id}
+            {displayEmails[index]}
           </button>
         ))}
       </ul>
