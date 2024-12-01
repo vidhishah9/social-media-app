@@ -13,15 +13,12 @@ export function MyForm() {
   const [idValue, setidValue] = useState('');
   const user = auth.currentUser;
   useEffect(() => {
-    // Set up the displayUserIds listener
     socket.on('displayUserIds', (ids) => {
       setdisplayIds(ids);
     });
   
     socket.on('private', (msg) => { //receive message from server  
-    console.log(msg.text + "RIGHT")
-    console.log(msg.email + "RIGHT") 
-    msg = "From: " + msg.email + msg.text 
+    msg = "From: " + msg.email + " " + msg.text 
     messages.push(msg)
     setdisplayMessage((prevMessages) => [...prevMessages, msg]); // Update state properly
 
@@ -40,7 +37,6 @@ export function MyForm() {
   
   function onSubmit(event) {
     if (user) {
-        // socket.emit("sendEmail", { text: setemail }); // Send the current value to the server
     } else {
       console.log("No user is signed in.");
     }
@@ -64,7 +60,6 @@ export function MyForm() {
         ))}
       </ul>
       <div>
-        {/* {displaymessage.length} */}
         {displaymessage.map((id, index) => (
           <p id = "Message" key={index} data-id={id}>
             {id}

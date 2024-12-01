@@ -9,27 +9,21 @@ export function ConnectionManager() {
   const user = auth.currentUser;
 
   // const [displayIds, setdisplayIds] = useState([]);
-  function connect() {    
-    
+  function connect() {  
+    socket.connect();  
     socket.on("connect_error", (err) => {
         console.log(`connect_error due to ${err.message}`);
       });
-      socket.on("connect", () => {
-        socket.emit("sendID", { text: socket.id }); //emit the socket.id to server
-        // socket.emit("sendEmail", { text: user.email }); //emit the email to server
-
-      });  
-    socket.connect();
-
-      
-  
-   
-    
-    
-  }
+      socket.off("connect").on("connect", () => { // Removes previous listeners
+        console.log("Connected:", socket.id);
+        socket.emit("sendID", { text: socket.id });
+    });
+      }
 
   function disconnect() {
-    socket.disconnect();
+    console.log(socket.id)
+    socket.emit("sendIDToDelete", { text: socket.id }); //emit the socket.id to server
+    
   }
 
   return (

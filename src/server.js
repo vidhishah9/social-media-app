@@ -23,6 +23,21 @@ io.on('connection', (socket) => {
 
   });
 
+  socket.on("sendIDToDelete", (data) => {
+    console.log("Here")
+    for (let i = 0; i < ids.length; i++) {
+      if (ids[i]==data.text) {
+        ids.splice(i, 1)
+      }
+    }
+    console.log(ids)
+    io.emit('displayUserIds', ids); //send ids back to client for display
+    socket.disconnect();
+
+
+  });
+
+
   var idtouse = "default"
   socket.on("getID", (data) => {
     socket.userData.id = data.text
