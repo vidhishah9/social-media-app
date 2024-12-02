@@ -42,7 +42,7 @@ export default function Chat() {
           return (
       
             <div>
-            <ConnectionState isConnected={ isConnected } />
+            {/* <ConnectionState isConnected={ isConnected } /> */}
             <Events events={ fooEvents } />
             <ConnectionManager />
             <MyForm />

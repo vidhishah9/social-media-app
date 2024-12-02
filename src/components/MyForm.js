@@ -11,7 +11,7 @@ export function MyForm() {
   const [displaymessage, setdisplayMessage] = useState([""]);
   const [displayIds, setdisplayIds] = useState([]);
   const [displayEmails, setdisplayEmails] = useState([]);
-
+  const [showMessage, setshowMessage] = useState(false)
   const [idValue, setidValue] = useState('');
   const user = auth.currentUser;
   useEffect(() => {
@@ -60,26 +60,29 @@ export function MyForm() {
     <div>
       <ul>
         {displayIds.map((id, index) => (
-          <button key={index} data-id={id} onClick={() => setidValue(id)}>
+          <button key={index} data-id={id} onClick={() => {setidValue(id); setshowMessage(true)}}>
             {displayEmails[index]}
           </button>
         ))}
       </ul>
+      {showMessage && (
       <div>
         {displaymessage.map((id, index) => (
           <p id = "Message" key={index} data-id={id}>
             {id}
           </p>
         ))}
-      </div>
-
       <form onSubmit={onSubmit}>
         <input onChange={(e) => setValue(e.target.value)} />
         <button type="submit" disabled={isLoading}>Submit</button>
       </form>
+      </div>
+      )}
 
+          <button type = "submit" onClick={() =>  setshowMessage(false)}>
+            Exit
+          </button>
      
-      {/* <h1>{displaymessage}</h1> */}
     </div>
   );
 }

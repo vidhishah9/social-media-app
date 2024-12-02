@@ -15,23 +15,16 @@ var ids = []
 var emails = []
 module.exports.ids = ids
 io.on('connection', (socket) => {
-
+  
   socket.userData = { email: null, id: null };
-
   socket.on("sendID", (data) => {
     ids.push(data.text)
     io.emit('displayUserIds', ids); //send ids back to client for display
-
   });
   socket.on("sendEmailToDisplay", (data) => {
     emails.push(data.text)
-    console.log("Right" + data.text)
     io.emit('displayEmails', emails); //send ids back to client for display
-
   });
-
-
-
   socket.on("sendIDToDelete", (data) => {
     for (let i = 0; i < ids.length; i++) {
       if (ids[i]==data.text) {
